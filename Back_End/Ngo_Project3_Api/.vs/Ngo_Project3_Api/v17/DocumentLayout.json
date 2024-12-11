@@ -1,0 +1,139 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\model\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\model\\users.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\model\\programs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\model\\programs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\model\\causes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\model\\causes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\model\\ngo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\model\\ngo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\model\\donations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\model\\donations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|d:\\project_3\\back_end\\ngo_project3_api\\ngo_project3_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9991B234-9325-441E-8998-5350D2FA54D6}|Ngo_Project3_Api\\Ngo_Project3_Api.csproj|solutionrelative:ngo_project3_api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Programs.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Programs.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Model\\Programs.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Programs.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Model\\Programs.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAmAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T02:02:37.159Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Donations.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Donations.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Model\\Donations.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Donations.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Model\\Donations.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAYwAsAAAAxAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T02:00:55.472Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Causes.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Causes.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Model\\Causes.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Causes.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Model\\Causes.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T01:59:40.774Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Ngo.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Ngo.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Model\\Ngo.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Ngo.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Model\\Ngo.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAsAAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T01:58:16.96Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Users.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Users.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Model\\Users.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Model\\Users.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Model\\Users.cs",
+              "ViewState": "AQIAAAIAAAAAAAAAAAAxwAYAAAAeAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T01:23:17.111Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Controllers\\UserController.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Controllers\\UserController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T01:08:34.336Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Program.cs",
+              "RelativeDocumentMoniker": "Ngo_Project3_Api\\Program.cs",
+              "ToolTip": "D:\\PROJECT_3\\Back_End\\Ngo_Project3_Api\\Ngo_Project3_Api\\Program.cs",
+              "RelativeToolTip": "Ngo_Project3_Api\\Program.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-11T00:54:25.01Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
