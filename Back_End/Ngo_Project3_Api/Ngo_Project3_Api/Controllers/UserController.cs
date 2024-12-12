@@ -82,9 +82,6 @@ namespace Ngo_Project3_Api.Controllers
                 }
             }
 
-            if (user == null)
-                return NotFound("User not found.");
-
             return Ok(user);
         }
 
@@ -113,14 +110,12 @@ namespace Ngo_Project3_Api.Controllers
                                 Email = reader.GetString("EMAIL"),
                                 Role = reader.GetString("ROLE")
                             };
-                            
-                            return Ok(user);
                         }
                     }
                 }
             }
 
-            return Unauthorized("Invalid credentials.");
+            return Ok(user);
         }
 
         
@@ -178,6 +173,9 @@ namespace Ngo_Project3_Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateUser(int id, [FromBody] Users user)
         {
+
+            Response res = null;
+
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -196,18 +194,32 @@ namespace Ngo_Project3_Api.Controllers
                     var rowsAffected = await command.ExecuteNonQueryAsync();
                     if (rowsAffected == 0)
                     {
-                        return NotFound("User not found.");
+                        res = new Response
+                        {
+                            code = "99",
+                            error = "User not found."
+                        };
+
+                        return Ok(res);
                     }
                 }
             }
 
-            return NoContent();
+            res = new Response
+            {
+                code = "00",
+                error = "Success."
+            };
+
+            return Ok(res);
         }
 
         // DELETE: api/User/{id}
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
+            Response res = null;
+
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
@@ -218,12 +230,24 @@ namespace Ngo_Project3_Api.Controllers
                     var rowsAffected = await command.ExecuteNonQueryAsync();
                     if (rowsAffected == 0)
                     {
-                        return NotFound("User not found.");
+                        res = new Response
+                        {
+                            code = "99",
+                            error = "User not found."
+                        };
+
+                        return Ok(res);
                     }
                 }
             }
 
-            return NoContent();
+            res = new Response
+            {
+                code = "00",
+                error = "Success."
+            };
+
+            return Ok(res);
         }
     }
 
@@ -231,6 +255,12 @@ namespace Ngo_Project3_Api.Controllers
     {
         public string User { get; set; }
         public string Password { get; set; }
+    }
+
+    public class Response
+    {
+        public string code { get; set; }
+        public string error { get; set; }
     }
 
 }
