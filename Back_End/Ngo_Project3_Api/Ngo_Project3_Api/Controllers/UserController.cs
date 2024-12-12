@@ -170,8 +170,8 @@ namespace Ngo_Project3_Api.Controllers
         }
 
         // PUT: api/User/{id}
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateUser(int id, [FromBody] Users user)
+        [HttpPost("updateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] Users user)
         {
 
             Response res = null;
@@ -182,7 +182,7 @@ namespace Ngo_Project3_Api.Controllers
                 string query = "UPDATE users SET FULL_NAME = @FullName, EMAIL = @Email, USER_NAME = @UserName, PASSWORD = @Password, ROLE = @Role, STATUS = @Status, UPDATE_TIME = @UpdateTime WHERE ID = @Id";
                 using (var command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Id", id);
+                    command.Parameters.AddWithValue("@Id", user.Id);
                     command.Parameters.AddWithValue("@FullName", user.FullName);
                     command.Parameters.AddWithValue("@UserName", user.UserName);
                     command.Parameters.AddWithValue("@Email", user.Email);
