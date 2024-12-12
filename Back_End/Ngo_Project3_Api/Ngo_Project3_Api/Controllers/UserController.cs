@@ -170,7 +170,7 @@ namespace Ngo_Project3_Api.Controllers
         }
 
         // PUT: api/User/{id}
-        [HttpPost("updateUser")]
+        [HttpPost("UpdateUser")]
         public async Task<IActionResult> UpdateUser([FromBody] Users user)
         {
 
