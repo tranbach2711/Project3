@@ -10,7 +10,7 @@ namespace Ngo_Project3_Api.Controllers
         private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
 
 
-        [HttpGet]
+        [HttpGet("GetCause")]
         public async Task<IActionResult> GetCauses()
         {
             var causes = new List<Causes>();
@@ -128,7 +128,7 @@ namespace Ngo_Project3_Api.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("causes/{id}")]
         public async Task<IActionResult> DeleteCause(int id)
         {
             Response res = null;

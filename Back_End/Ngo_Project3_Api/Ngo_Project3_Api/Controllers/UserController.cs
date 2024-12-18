@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
 using Ngo_Project3_Api.Model;
+using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Data;
 
@@ -50,7 +51,7 @@ namespace Ngo_Project3_Api.Controllers
         }
 
         // GET: api/User/email
-        [HttpGet("{email}")]
+/*        [HttpGet("{email}")]
         public async Task<IActionResult> GetUser(string email)
         {
             Users user = null;
@@ -83,7 +84,7 @@ namespace Ngo_Project3_Api.Controllers
             }
 
             return Ok(user);
-        }
+        }*/
 
         // POST: api/User/Login
         [HttpPost("Login")]
@@ -122,51 +123,143 @@ namespace Ngo_Project3_Api.Controllers
         [HttpPost("CreateUser")]
         public async Task<IActionResult> InsertUser([FromBody] Users user)
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            Response res = null;
+            try
             {
-                await connection.OpenAsync();
-                string query = "INSERT INTO users (FULL_NAME, EMAIL,USER_NAME, PASSWORD, ROLE, STATUS, CREATE_TIME, UPDATE_TIME) VALUES (@FullName, @Email, @Username, @Password, @Role, @Status, @CreateTime, @UpdateTime)";
-                using (var command = new MySqlCommand(query, connection))
+                using (var connection = new MySqlConnection(_connectionString))
                 {
-                    command.Parameters.AddWithValue("@FullName", user.FullName);
-                    command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Username", user.UserName);
-                    command.Parameters.AddWithValue("@Password", user.Password);
-                    command.Parameters.AddWithValue("@Role", "00");
-                    command.Parameters.AddWithValue("@Status", "00");
-                    command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
-                    command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
+                    await connection.OpenAsync();
+                    string query = "SELECT count(*) FROM users WHERE USER_NAME = @user ";
+                    using (var command1 = new MySqlCommand(query, connection))
+                    {
+                        command1.Parameters.AddWithValue("@user", user.UserName);
+                        var count = Convert.ToInt32(await command1.ExecuteScalarAsync());
+                        if (count > 0)
+                        {
+                            // User đã tồn tại
+                            res = new Response
+                            {
+                                code = "99",
+                                error = "User already exists."
+                            };
+                            Console.WriteLine("User already exists.");
+                        }
+                        else
+                        {
+                            using (connection)
+                            {
+                                await connection.OpenAsync();
+                                string query2 = "INSERT INTO users (FULL_NAME, EMAIL,USER_NAME, PASSWORD, ROLE, STATUS, CREATE_TIME, UPDATE_TIME) VALUES (@FullName, @Email, @Username, @Password, @Role, @Status, @CreateTime, @UpdateTime)";
+                                using (var command = new MySqlCommand(query2, connection))
+                                {
+                                    command.Parameters.AddWithValue("@FullName", user.FullName);
+                                    command.Parameters.AddWithValue("@Email", user.Email);
+                                    command.Parameters.AddWithValue("@Username", user.UserName);
+                                    command.Parameters.AddWithValue("@Password", user.Password);
+                                    command.Parameters.AddWithValue("@Role", "00");
+                                    command.Parameters.AddWithValue("@Status", "00");
+                                    command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
+                                    command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
 
-                    await command.ExecuteNonQueryAsync();
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            res = new Response
+                            {
+                                code = "00",
+                                error = "Success."
+                            };
+                        }
+                    }
                 }
+
+
+                
+            }
+            catch (Exception ex)
+            {
+                res = new Response
+                {
+                    code = "99",
+                    error = ex.Message
+                };
             }
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+           
+
+            return Ok(res);
         }
 
         [HttpPost("CreateUserorAdmin")]
         public async Task<IActionResult> InsertUserAdmin([FromBody] Users user)
         {
-            using (var connection = new MySqlConnection(_connectionString))
+            Response res = null;
+            try
             {
-                await connection.OpenAsync();
-                string query = "INSERT INTO users (FULL_NAME, EMAIL,USER_NAME, PASSWORD, ROLE, STATUS, CREATE_TIME, UPDATE_TIME) VALUES (@FullName, @Email, @Username, @Password, @Role, @Status, @CreateTime, @UpdateTime)";
-                using (var command = new MySqlCommand(query, connection))
+                using (var connection = new MySqlConnection(_connectionString))
                 {
-                    command.Parameters.AddWithValue("@FullName", user.FullName);
-                    command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Username", user.UserName);
-                    command.Parameters.AddWithValue("@Password", user.Password);
-                    command.Parameters.AddWithValue("@Role", user.Role);
-                    command.Parameters.AddWithValue("@Status", "00");
-                    command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
-                    command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
+                    await connection.OpenAsync();
+                    string query = "SELECT count(*) FROM users WHERE USER_NAME = @user ";
+                    using (var command1 = new MySqlCommand(query, connection))
+                    {
+                        command1.Parameters.AddWithValue("@user", user.UserName);
+                        var count = Convert.ToInt32(await command1.ExecuteScalarAsync());
+                        if (count > 0)
+                        {
+                            // User đã tồn tại
+                            res = new Response
+                            {
+                                code = "99",
+                                error = "User already exists."
+                            };
+                            Console.WriteLine("User already exists.");
+                        }
+                        else
+                        {
+                            using (connection)
+                            {
+                                await connection.OpenAsync();
+                                string query2 = "INSERT INTO users (FULL_NAME, EMAIL,USER_NAME, PASSWORD, ROLE, STATUS, CREATE_TIME, UPDATE_TIME) VALUES (@FullName, @Email, @Username, @Password, @Role, @Status, @CreateTime, @UpdateTime)";
+                                using (var command = new MySqlCommand(query2, connection))
+                                {
+                                    command.Parameters.AddWithValue("@FullName", user.FullName);
+                                    command.Parameters.AddWithValue("@Email", user.Email);
+                                    command.Parameters.AddWithValue("@Username", user.UserName);
+                                    command.Parameters.AddWithValue("@Password", user.Password);
+                                    command.Parameters.AddWithValue("@Role", user.Role);
+                                    command.Parameters.AddWithValue("@Status", "00");
+                                    command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
+                                    command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
 
-                    await command.ExecuteNonQueryAsync();
+                                    await command.ExecuteNonQueryAsync();
+                                }
+                            }
+
+                            res = new Response
+                            {
+                                code = "00",
+                                error = "Success."
+                            };
+                        }
+                    }
                 }
+
+
+
+            }
+            catch (Exception ex)
+            {
+                res = new Response
+                {
+                    code = "99",
+                    error = ex.Message
+                };
             }
 
-            return CreatedAtAction(nameof(GetUser), new { id = user.Id }, user);
+
+
+            return Ok(res);
         }
 
         // PUT: api/User/{id}
@@ -214,7 +307,7 @@ namespace Ngo_Project3_Api.Controllers
             return Ok(res);
         }
 
-        // DELETE: api/User/{id}
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {

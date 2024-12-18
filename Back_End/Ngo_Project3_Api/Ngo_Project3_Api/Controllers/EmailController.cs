@@ -28,7 +28,7 @@ namespace Ngo_Project3_Api.Controllers
 
             try
             {
-                SendOtp(getEmail.email);
+                SendtoEmail(getEmail.email);
             }
             catch (Exception ex) {
                 res = new Response
@@ -43,7 +43,7 @@ namespace Ngo_Project3_Api.Controllers
             return Ok(res);
         }
 
-        public static void SendOtp(string toEmail)
+        public static void SendtoEmail(string toEmail)
         {
             const string fromEmail = "ttsp@tax24.com.vn"; //requires valid email id
             const string password = "z080G&jK"; // correct password for email id

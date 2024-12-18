@@ -10,7 +10,7 @@ namespace Ngo_Project3_Api.Controllers
         private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
 
 
-        [HttpGet]
+        [HttpGet("GetProgram")]
         public async Task<IActionResult> GetPrograms()
         {
             var program = new List<Programs>();
@@ -130,7 +130,7 @@ namespace Ngo_Project3_Api.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("progarm/{id}")]
         public async Task<IActionResult> DeleteProgram(int id)
         {
             Response res = null;
