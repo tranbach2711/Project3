@@ -55,7 +55,6 @@ namespace Ngo_Project3_Api.Controllers
                         }
                     }
                 }
-                await connection.CloseAsync();
             }
 
             return Ok(users);
@@ -125,7 +124,6 @@ namespace Ngo_Project3_Api.Controllers
                         }
                     }
                 }
-                await connection.CloseAsync();
             }
 
             return Ok(user);
@@ -160,7 +158,6 @@ namespace Ngo_Project3_Api.Controllers
                         {
                             using (connection)
                             {
-                                await connection.OpenAsync();
                                 string query2 = "INSERT INTO users (FULL_NAME, EMAIL,USER_NAME, PASSWORD, ROLE, STATUS, CREATE_TIME, UPDATE_TIME) VALUES (@FullName, @Email, @Username, @Password, @Role, @Status, @CreateTime, @UpdateTime)";
                                 using (var command = new MySqlCommand(query2, connection))
                                 {
@@ -184,7 +181,6 @@ namespace Ngo_Project3_Api.Controllers
                             };
                         }
                     }
-                    await connection.CloseAsync();
                 }
 
 
@@ -233,7 +229,6 @@ namespace Ngo_Project3_Api.Controllers
                         {
                             using (connection)
                             {
-                                await connection.OpenAsync();
                                 string query2 = "INSERT INTO users (FULL_NAME, EMAIL,USER_NAME, PASSWORD, ROLE, STATUS, CREATE_TIME, UPDATE_TIME) VALUES (@FullName, @Email, @Username, @Password, @Role, @Status, @CreateTime, @UpdateTime)";
                                 using (var command = new MySqlCommand(query2, connection))
                                 {
@@ -257,7 +252,7 @@ namespace Ngo_Project3_Api.Controllers
                             };
                         }
                     }
-                    await connection.CloseAsync();
+
                 }
 
 
@@ -311,7 +306,6 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
-                await connection.CloseAsync();
             }
 
             res = new Response
@@ -348,7 +342,6 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
-                await connection.CloseAsync();
             }
 
             res = new Response

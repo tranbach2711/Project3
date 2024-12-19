@@ -55,7 +55,7 @@ namespace Ngo_Project3_Api.Controllers
                             }
                         }
                     }
-                    await connection.CloseAsync();
+                    
                 }
                 if (getEmail.email != null && !"".Equals(getEmail.email) && name != null && !"".Equals(name))
                 {

@@ -46,7 +46,7 @@ namespace Ngo_Project3_Api.Controllers
                         }
                     }
                 }
-                await connection.CloseAsync();
+
             }
 
             return Ok(program);
@@ -74,7 +74,7 @@ namespace Ngo_Project3_Api.Controllers
 
                         await command.ExecuteNonQueryAsync();
                     }
-                    await connection.CloseAsync();
+
                 }
 
                 res = new Response
@@ -129,7 +129,7 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
-                await connection.CloseAsync();
+
             }
 
             res = new Response
@@ -166,7 +166,7 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
-                await connection.CloseAsync();
+
             }
 
             res = new Response
