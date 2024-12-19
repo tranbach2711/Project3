@@ -6,6 +6,7 @@ using System.Net.Security;
 using System.Net;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Org.BouncyCastle.Tls;
+using System.Data;
 
 namespace Ngo_Project3_Api.Controllers
 {
@@ -13,7 +14,15 @@ namespace Ngo_Project3_Api.Controllers
     [Route("api/[controller]")]
     public class EmailController : Controller
     {
-        private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
+        private readonly IConfiguration _configuration;
+        private string _connectionString = "";
+
+        public EmailController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+        }
+        //private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
 
         [HttpPost("sendEmail")]
         public async Task<IActionResult> SendEmail([FromBody] GetEmail getEmail)
@@ -28,7 +37,31 @@ namespace Ngo_Project3_Api.Controllers
 
             try
             {
-                SendtoEmail(getEmail.email);
+
+                string name = null;
+
+                using (var connection = new MySqlConnection(_connectionString))
+                {
+                    await connection.OpenAsync();
+                    string query = "SELECT * FROM users WHERE ID = @id";
+                    using (var command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", getEmail.userId);
+                        using (var reader = await command.ExecuteReaderAsync())
+                        {
+                            if (await reader.ReadAsync())
+                            {
+                                name = reader.GetString("FULL_NAME");
+                            }
+                        }
+                    }
+                    await connection.CloseAsync();
+                }
+                if (getEmail.email != null && !"".Equals(getEmail.email) && name != null && !"".Equals(name))
+                {
+                    SendtoEmail(getEmail.email, name);
+                }
+                
             }
             catch (Exception ex) {
                 res = new Response
@@ -43,7 +76,7 @@ namespace Ngo_Project3_Api.Controllers
             return Ok(res);
         }
 
-        public static void SendtoEmail(string toEmail)
+        public static void SendtoEmail(string toEmail,string name)
         {
             const string fromEmail = "ttsp@tax24.com.vn"; //requires valid email id
             const string password = "z080G&jK"; // correct password for email id
@@ -66,7 +99,7 @@ namespace Ngo_Project3_Api.Controllers
         <body style='font-family: Arial, sans-serif; line-height: 1.6;'>
             <p>Dear Mr/Mrs,</p>
             <p>We hope this email finds you well and in good health.</p>
-            <p>I would like to introduce myself, I am <strong>Admin</strong>, a representative from the NGO <strong>Give-AID</strong>. We are on a mission to bring hope and support to those who need it most.</p>
+            <p>I would like to introduce myself, I am <strong>{name}</strong>, a representative from the NGO <strong>Give-AID</strong>. We are on a mission to bring hope and support to those who need it most.</p>
             <p>With the support of the community, we have implemented many meaningful programs, including:</p>
             <ul>
                 <li><strong>Supporting education:</strong> Bringing knowledge to children in difficult circumstances.</li>
@@ -118,6 +151,7 @@ namespace Ngo_Project3_Api.Controllers
         }
         public class GetEmail
         {
+            public string userId { get; set; }
             public string email { get; set; }
         }
 

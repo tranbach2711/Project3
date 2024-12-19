@@ -7,7 +7,16 @@ namespace Ngo_Project3_Api.Controllers
 {
     public class ProgramsController : Controller
     {
-        private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
+        private readonly IConfiguration _configuration;
+        private string _connectionString = "";
+
+        public ProgramsController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+        }
+    
+        //private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
 
 
         [HttpGet("GetProgram")]
@@ -37,6 +46,7 @@ namespace Ngo_Project3_Api.Controllers
                         }
                     }
                 }
+                await connection.CloseAsync();
             }
 
             return Ok(program);
@@ -64,6 +74,7 @@ namespace Ngo_Project3_Api.Controllers
 
                         await command.ExecuteNonQueryAsync();
                     }
+                    await connection.CloseAsync();
                 }
 
                 res = new Response
@@ -118,6 +129,7 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
+                await connection.CloseAsync();
             }
 
             res = new Response
@@ -154,6 +166,7 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
+                await connection.CloseAsync();
             }
 
             res = new Response

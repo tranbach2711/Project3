@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
+using Ngo_Project3_Api.Middleware;
 using Ngo_Project3_Api.Model;
 using Org.BouncyCastle.Asn1.Ocsp;
 using System;
 using System.Data;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Ngo_Project3_Api.Controllers
 {
@@ -12,8 +15,15 @@ namespace Ngo_Project3_Api.Controllers
     [Route("api/[controller]")]
     public class UserController : Controller
     {
+        private readonly IConfiguration _configuration;
+        private string _connectionString = "";
 
-        private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
+        public UserController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+            _connectionString = _configuration.GetConnectionString("DefaultConnection");
+        }
+        //private readonly string _connectionString = "Server=localhost;Port=3306;Database=sys;User=root;Password=ngo_project3;";
 
         // GET: api/User
         [HttpGet]
@@ -45,6 +55,7 @@ namespace Ngo_Project3_Api.Controllers
                         }
                     }
                 }
+                await connection.CloseAsync();
             }
 
             return Ok(users);
@@ -98,7 +109,7 @@ namespace Ngo_Project3_Api.Controllers
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@user", request.User);
-                    command.Parameters.AddWithValue("@Password", request.Password);
+                    command.Parameters.AddWithValue("@Password", MD5Encryption.EncryptMD5(request.Password));
                     using (var reader = await command.ExecuteReaderAsync())
                     {
                         if (await reader.ReadAsync())
@@ -114,6 +125,7 @@ namespace Ngo_Project3_Api.Controllers
                         }
                     }
                 }
+                await connection.CloseAsync();
             }
 
             return Ok(user);
@@ -155,7 +167,7 @@ namespace Ngo_Project3_Api.Controllers
                                     command.Parameters.AddWithValue("@FullName", user.FullName);
                                     command.Parameters.AddWithValue("@Email", user.Email);
                                     command.Parameters.AddWithValue("@Username", user.UserName);
-                                    command.Parameters.AddWithValue("@Password", user.Password);
+                                    command.Parameters.AddWithValue("@Password", MD5Encryption.EncryptMD5(user.Password));
                                     command.Parameters.AddWithValue("@Role", "00");
                                     command.Parameters.AddWithValue("@Status", "00");
                                     command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
@@ -172,6 +184,7 @@ namespace Ngo_Project3_Api.Controllers
                             };
                         }
                     }
+                    await connection.CloseAsync();
                 }
 
 
@@ -195,6 +208,7 @@ namespace Ngo_Project3_Api.Controllers
         public async Task<IActionResult> InsertUserAdmin([FromBody] Users user)
         {
             Response res = null;
+
             try
             {
                 using (var connection = new MySqlConnection(_connectionString))
@@ -226,7 +240,7 @@ namespace Ngo_Project3_Api.Controllers
                                     command.Parameters.AddWithValue("@FullName", user.FullName);
                                     command.Parameters.AddWithValue("@Email", user.Email);
                                     command.Parameters.AddWithValue("@Username", user.UserName);
-                                    command.Parameters.AddWithValue("@Password", user.Password);
+                                    command.Parameters.AddWithValue("@Password", MD5Encryption.EncryptMD5(user.Password));
                                     command.Parameters.AddWithValue("@Role", user.Role);
                                     command.Parameters.AddWithValue("@Status", "00");
                                     command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
@@ -243,6 +257,7 @@ namespace Ngo_Project3_Api.Controllers
                             };
                         }
                     }
+                    await connection.CloseAsync();
                 }
 
 
@@ -272,14 +287,14 @@ namespace Ngo_Project3_Api.Controllers
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "UPDATE users SET FULL_NAME = @FullName, EMAIL = @Email, USER_NAME = @UserName, PASSWORD = @Password, ROLE = @Role, STATUS = @Status, UPDATE_TIME = @UpdateTime WHERE ID = @Id";
+                string query = "UPDATE users SET FULL_NAME = @FullName, EMAIL = @Email, USER_NAME = @UserName, ROLE = @Role, STATUS = @Status, UPDATE_TIME = @UpdateTime WHERE ID = @Id";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", user.Id);
                     command.Parameters.AddWithValue("@FullName", user.FullName);
                     command.Parameters.AddWithValue("@UserName", user.UserName);
                     command.Parameters.AddWithValue("@Email", user.Email);
-                    command.Parameters.AddWithValue("@Password", user.Password);
+//                    command.Parameters.AddWithValue("@Password", EncryptMD5(user.Password));
                     command.Parameters.AddWithValue("@Role", user.Role);
                     command.Parameters.AddWithValue("@Status", user.Status);
                     command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
@@ -296,6 +311,7 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
+                await connection.CloseAsync();
             }
 
             res = new Response
@@ -332,6 +348,7 @@ namespace Ngo_Project3_Api.Controllers
                         return Ok(res);
                     }
                 }
+                await connection.CloseAsync();
             }
 
             res = new Response
@@ -342,8 +359,10 @@ namespace Ngo_Project3_Api.Controllers
 
             return Ok(res);
         }
+
     }
 
+    
     public class LoginRequest
     {
         public string User { get; set; }
