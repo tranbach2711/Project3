@@ -40,6 +40,7 @@ namespace Ngo_Project3_Api.Controllers
                                 ProgramName = reader.GetString("PROGRAM_NAME"),
                                 Depcription = reader.GetString("DESCRIPTION"),
                                 NgoId = reader.GetInt32("NGO_ID"),
+                                Img = reader.GetString("IMG"),
                                 CreateTime = reader.GetDateTime("CREATE_TIME"),
                                 UpdateTime = reader.GetDateTime("UPDATE_TIME")
                             });
@@ -63,12 +64,13 @@ namespace Ngo_Project3_Api.Controllers
                 using (var connection = new MySqlConnection(_connectionString))
                 {
                     await connection.OpenAsync();
-                    string query2 = "INSERT INTO programs (PROGRAM_NAME, DESCRIPTION,NGO_ID, CREATE_TIME, UPDATE_TIME) VALUES (@ProgramName, @Descreption,@NgoId, @CreateTime, @UpdateTime)";
+                    string query2 = "INSERT INTO programs (PROGRAM_NAME, DESCRIPTION,NGO_ID,IMG, CREATE_TIME, UPDATE_TIME) VALUES (@ProgramName, @Descreption,@NgoId,@Img, @CreateTime, @UpdateTime)";
                     using (var command = new MySqlCommand(query2, connection))
                     {
                         command.Parameters.AddWithValue("@ProgramName", program.ProgramName);
                         command.Parameters.AddWithValue("@Descreption", program.Depcription);
                         command.Parameters.AddWithValue("@NgoId", program.NgoId);
+                        command.Parameters.AddWithValue("@Img", program.Img);
                         command.Parameters.AddWithValue("@CreateTime", DateTime.UtcNow);
                         command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
 
@@ -109,12 +111,13 @@ namespace Ngo_Project3_Api.Controllers
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "UPDATE programs SET PROGRAM_NAME = @ProgramName, DESCRIPTION = @Descreption,NGO_ID = @NgoId, UPDATE_TIME = @UpdateTime WHERE ID = @Id";
+                string query = "UPDATE programs SET PROGRAM_NAME = @ProgramName, IMG = @Img, DESCRIPTION = @Descreption,NGO_ID = @NgoId, UPDATE_TIME = @UpdateTime WHERE ID = @Id";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ProgramName", program.ProgramName);
                     command.Parameters.AddWithValue("@Descreption", program.Depcription);
                     command.Parameters.AddWithValue("@NgoId", program.NgoId);
+                    command.Parameters.AddWithValue("@Img", program.Img);
                     command.Parameters.AddWithValue("@UpdateTime", DateTime.UtcNow);
 
                     var rowsAffected = await command.ExecuteNonQueryAsync();

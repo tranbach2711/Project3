@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public string ProgramName { get; set; }
         public string Depcription { get; set; }
+        public string Img { get; set; }
         public int NgoId { get; set; }
         public DateTime CreateTime { get; set; }
         public DateTime UpdateTime { get; set; }
