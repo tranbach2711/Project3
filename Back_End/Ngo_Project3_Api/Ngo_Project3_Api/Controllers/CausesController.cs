@@ -147,7 +147,7 @@ namespace Ngo_Project3_Api.Controllers
             using (var connection = new MySqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                string query = "DELETE FROM cause WHERE ID = @Id";
+                string query = "DELETE FROM causes WHERE ID = @Id";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Id", id);
